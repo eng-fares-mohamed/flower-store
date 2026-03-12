@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satin Flowers | متجر فارس حنفي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #ff4081; --secondary: #2c3e50; --bg: #f8f9fa; --white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: var(--bg); }
+        
+        .hover-text:hover { color: var(--primary) !important; transform: scale(1.03); transition: 0.3s; cursor: pointer; }
+
+        nav { background: var(--white); padding: 15px 8%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 26px; font-weight: bold; color: var(--primary); text-decoration: none; cursor: pointer; }
+
+        .page-section { display: none; padding: 40px 8%; min-height: 80vh; }
+        .active { display: block !important; }
+
+        .hero-split { display: flex; height: calc(100vh - 70px); }
+        .split-box { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: 0.5s; color: white; text-align: center; }
+        .flowers-side { background: linear-gradient(rgba(255,64,129,0.7), rgba(255,64,129,0.7)), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=600'); background-size: cover; }
+        .decor-side { background: linear-gradient(rgba(44,62,80,0.7), rgba(44,62,80,0.7)), url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600'); background-size: cover; }
+        .split-box:hover { flex: 1.3; }
+        .split-box h1 { font-size: 3.5rem; margin: 0; pointer-events: none; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+        .card img { width: 100%; height: 380px; object-fit: cover; }
+        .buy-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; width: 85%; margin-bottom: 20px; font-weight: bold; }
+
+        /* عربة الشراء */
+        .cart-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
+        .cart-modal { background: white; width: 90%; max-width: 400px; padding: 30px; border-radius: 20px; text-align: center; }
+        .cart-list { text-align: right; background: #fff0f5; padding: 15px; border-radius: 10px; margin-bottom: 20px; max-height: 150px; overflow-y: auto; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .btn-modal { padding: 12px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+
+        footer { background: var(--secondary); color: white; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo hover-text" onclick="showPage('home-page')">🌸 Satin Flowers</div>
+        <div class="nav-links">
+            <span class="hover-text" onclick="showPage('home-page')">الرئيسية</span>
+        </div>
+    </nav>
+
+    <div id="home-page" class="page-section active" style="padding:0">
+        <div class="hero-split">
+            <div class="split-box flowers-side" onclick="showPage('flowers-page')">
+                <h1>قسم الورود</h1>
+                <p>باقات الساتان الفاخرة</p>
+            </div>
+            <div class="split-box decor-side" onclick="showPage('decor-page')">
+                <h1>قسم الديكور</h1>
+                <p>لمسات منزلية عصرية</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="flowers-page" class="page-section">
+        <button onclick="showPage('home-page')" style="cursor:pointer; padding:10px 20px; margin-bottom:20px;">← رجوع</button>
+        <h2 style="text-align:center">كتالوج الورود</h2>
+        <div class="grid">
+            <div class="card"><img src="jpg.1.jpeg"><h3>Midnight Black</h3><div style="color:var(--primary); font-weight:bold">250 ج</div><button class="buy-btn" onclick="addToCart('Midnight Black')">شراء</button></div>
+            <div class="card"><img src="jpg.2.jpeg"><h3>Passion Mix</h3><div style="color:var(--primary); font-weight:bold">200 ج</div><button class="buy-btn" onclick="addToCart('Passion Mix')">شراء</button></div>
+            <div class="card"><img src="jpg.3.jpeg"><h3>Pink Blossom</h3><div style="color:var(--primary); font-weight:bold">250 ج</div><button class="buy-btn" onclick="addToCart('Pink Blossom')">شراء</button></div>
+            <div class="card"><img src="jpg.4.jpeg"><h3>Classic Red</h3><div style="color:var(--primary); font-weight:bold">200 ج</div><button class="buy-btn" onclick="addToCart('Classic Red')">شراء</button></div>
+            <div class="card"><img src="jpg.5.jpeg"><h3>Golden Elegance</h3><div style="color:var(--primary); font-weight:bold">200 ج</div><button class="buy-btn" onclick="addToCart('Golden Elegance')">شراء</button></div>
+        </div>
+    </div>
+
+    <div id="decor-page" class="page-section">
+        <button onclick="showPage('home-page')" style="cursor:pointer; padding:10px 20px; margin-bottom:20px;">← رجوع</button>
+        <h2 style="text-align:center">قسم الديكور</h2>
+        <div class="grid">
+            <div class="card" style="padding:30px"><i class="fas fa-couch fa-4x"></i><h3>مفرش طاولات</h3><div style="color:var(--primary); font-weight:bold">100 ج</div><button class="buy-btn" onclick="addToCart('مفرش طاولات')">شراء</button></div>
+            <div class="card" style="padding:30px"><i class="fas fa-heart fa-4x"></i><h3>تعليقة حائط</h3><div style="color:var(--primary); font-weight:bold">100 ج</div><button class="buy-btn" onclick="addToCart('تعليقة حائط')">شراء</button></div>
+        </div>
+    </div>
+
+    <div id="cart-overlay" class="cart-overlay">
+        <div class="cart-modal">
+            <h2>سلة المشتريات 🛒</h2>
+            <div id="cart-items-list" class="cart-list">
+                </div>
+            <div class="btn-group">
+                <button class="btn-modal" style="background:#55acee; color:white" onclick="closeCart()">➕ إضافة منتج آخر</button>
+                <button class="btn-modal" style="background:#25d366; color:white" onclick="confirmOrder()">✅ تأكيد وإرسال للواتساب</button>
+                <button class="btn-modal" style="background:#e74c3c; color:white" onclick="clearCart()">❌ مسح الكل وإلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <footer><p>تصميم م/ فارس محمد حنفي | 01558474311</p></footer>
+
+    <script>
+        let cart = []; // مصفوفة لتخزين المنتجات
+
+        function showPage(id) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function addToCart(name) {
+            cart.push(name); // إضافة المنتج الجديد للمصفوفة
+            updateCartUI();
+            document.getElementById('cart-overlay').style.display = 'flex';
+        }
+
+        function updateCartUI() {
+            const listDiv = document.getElementById('cart-items-list');
+            listDiv.innerHTML = cart.map((item, index) => `<div>${index + 1}- ${item}</div>`).join('');
+        }
+
+        function clearCart() {
+            cart = [];
+            closeCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cart-overlay').style.display = 'none';
+        }
+
+        function confirmOrder() {
+            if (cart.length === 0) return alert("السلة فاضية يا هندسة!");
+            
+            // تجميع المنتجات في نص واحد للواتساب
+            const orderText = cart.map((item, index) => `${index + 1}- ${item}`).join('%0A');
+            const finalMsg = `مرحباً م/ فارس، أود طلب المشتريات التالية:%0A${orderText}`;
+            
+            window.open(`https://wa.me/201558474311?text=${finalMsg}`, '_blank');
+            cart = []; // تصفير السلة بعد الإرسال
+            closeCart();
+        }
+    </script>
+</body>
+</html>
